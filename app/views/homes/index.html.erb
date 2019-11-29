@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+    <% @homes.each_slice(3) do |row| %>
+      <% row.each do |home| %>
+        <div class="col-md-3 my-3">
+          <div class="card">
+            <%= image_tag home.photo, class:'card-img-top img-fluid' %>
+            <div class="card-body">
+              <h5 class="card-title text-center"><%= home.address %></h5>
+            </div>
+            <div class="card-footer">
+              <% if user_signed_in? %>
+                <%= link_to "Ver tareas", home_tasks_path(home), class: 'btn btn-success btn-block'%>
+              <% else %>
+                <a class="btn btn-primary btn-block" href="<%= new_user_session_path %>"> Registrese <span class="sr-only">(current)</span></a>
+              <% end %>
+            </div>
+          </div>
+        </div>
+       <% end %>
+     <% end %>
+  </div>
+</div>

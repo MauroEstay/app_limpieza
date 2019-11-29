@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row">
+        <% @tasks.each_slice(3) do |row| %>
+            <% row.each do |task| %>
+              <div class="col-md-3 my-3">
+                <div class="card">
+                  <%= image_tag task.photo, class:'card-img-top img-fluid' %>
+                  <div class="card-body">
+                    <h5 class="card-title text-center"><%= task.name %></h5>
+                    <% if mismo_home?(task) %>
+                      <p class="text-center">Presione para deshacer la tarea</p>
+                      <%= link_to "Borrar", home_task_hometask_path(@home_id, task, current_user), class: 'btn btn-danger btn-block', method: :delete%>
+                    <% else %>
+                    <p class="text-center">Presione para marcar como listo</p>
+                      <%= link_to "Realizar", home_task_hometasks_path(@home_id, task), class: 'btn btn-success btn-block', method: :post%>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+             <% end %>
+         <% end %>
+  </div>
+</div>
